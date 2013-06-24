@@ -259,6 +259,7 @@ endmenu
 source "package/freescale-imx/Config.in"
 source "package/a10disp/Config.in"
 source "package/acpid/Config.in"
+source "package/am335x-pru-package/Config.in"
 source "package/cdrkit/Config.in"
 source "package/cryptsetup/Config.in"
 source "package/dbus/Config.in"
