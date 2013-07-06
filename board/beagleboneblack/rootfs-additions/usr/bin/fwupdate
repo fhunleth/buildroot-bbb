@@ -20,6 +20,6 @@ fi
 archive="$1"
 shift
 
-set -o pipefail
+#set -o pipefail
 unzip -p $archive install.sh | sh -s - -a $archive $@
 
