@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Check for the first boot and initialize the MicroSD card
+# if it has not been initialized before. 
+
+# The image creation script will create a file in the rootfs partition
+# called 1stboot. After we have initialized everything, erase this 
+# file. The next time that the user boots, this logic will be skipped.
+
+if [ -e /etc/1stboot ];
+then
+        echo "First time boot detected"
+
+        grep mmcblk0p4 /proc/mounts >/dev/null
+        if [ "$?" != "0" ];
+        then
+                echo "Performing first time format of /root (/dev/mmcblk0p4)"
+                mke2fs -t ext4 -L home /dev/mmcblk0p4
+
+                # Mount our newly formatted user partition 
+                mount /root
+        fi
+
+        echo "Clearing first time boot flag"
+        mount -o remount,rw /
+        rm /etc/1stboot
+        mount -o remount,ro /
+fi
+
+
