@@ -1,0 +1,25 @@
+From d92c4db607116ec4f8013c00f394a8fa5650389b Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Sat, 6 Jul 2013 20:43:58 -0400
+Subject: [PATCH] Add missing DTC flags
+
+---
+ arch/arm/Makefile |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/Makefile b/arch/arm/Makefile
+index e9729a4..d5935c0 100644
+--- a/arch/arm/Makefile
++++ b/arch/arm/Makefile
+@@ -299,7 +299,7 @@ uImage-dtb.%: scripts
+ 	$(Q)$(MAKE) $(build)=$(boot) MACHINE=$(MACHINE) $(boot)/$@
+ 
+ %.dtb: scripts
+-	$(Q)$(MAKE) $(build)=$(boot)/dts MACHINE=$(MACHINE) $(boot)/dts/$@
++	$(Q)$(MAKE) $(build)=$(boot)/dts MACHINE=$(MACHINE) DTC_FLAGS=$(DTC_FLAGS) $(boot)/dts/$@
+ 
+ dtbs: scripts
+ 	$(Q)$(MAKE) $(build)=$(boot)/dts MACHINE=$(MACHINE) DTC_FLAGS=$(DTC_FLAGS) dtbs
+-- 
+1.7.9.5
+
