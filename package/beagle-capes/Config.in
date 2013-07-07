@@ -1,0 +1,12 @@
+config BR2_PACKAGE_BEAGLE_CAPES
+	bool "beagle-capes"
+	depends on BR2_LINUX_KERNEL && BR2_arm
+	select BR2_LINUX_KERNEL_INSTALL_FIRMWARE
+	help
+	  Installs beaglebone capes firmware from the kernel source.
+
+	  This package requires that a kernel with beaglebone capes firmware is
+	  selected.
+
+comment "requires the linux kernel"
+	depends on !(BR2_LINUX_KERNEL)
