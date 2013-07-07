@@ -256,6 +256,15 @@ define LINUX_INSTALL_KERNEL_IMAGE_TO_TARGET
 endef
 endif
 
+ifeq ($(BR2_LINUX_KERNEL_INSTALL_FIRMWARE),y)
+
+LINUX_INSTALL_STAGING = YES
+
+define LINUX_INSTALL_FIRMWARE_TO_STAGING
+	$(TARGET_MAKE_ENV) $(MAKE) $(LINUX_MAKE_FLAGS) -C $(@D) firmware_install \
+		INSTALL_FW_PATH=$(STAGING_DIR)/lib/firmware/
+endef
+endif
 
 define LINUX_INSTALL_HOST_TOOLS
 	# Installing dtc (device tree compiler) as host tool, if selected
@@ -267,6 +276,10 @@ endef
 
 define LINUX_INSTALL_IMAGES_CMDS
 	cp $(LINUX_IMAGE_PATH) $(BINARIES_DIR)
+endef
+
+define LINUX_INSTALL_STAGING_CMDS
+	$(LINUX_INSTALL_FIRMWARE_TO_STAGING)
 endef
 
 define LINUX_INSTALL_TARGET_CMDS

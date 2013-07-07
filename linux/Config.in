@@ -297,6 +297,11 @@ config BR2_LINUX_KERNEL_INSTALL_TARGET
 	  /boot in the target root filesystem, as is typically done on
 	  x86/x86_64 systems.
 
+# This option is used to install firmware to staging. Other packages such as
+# beagle-capes then install the firmware into the target. This avoids
+# installing all linux firmware.
+config BR2_LINUX_KERNEL_INSTALL_FIRMWARE
+	bool
 
 # Linux extensions
 source "linux/Config.ext.in"
