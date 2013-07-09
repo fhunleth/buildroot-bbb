@@ -1,0 +1,8 @@
+config BR2_PACKAGE_ANGULARJS
+	bool "AngularJS"
+	help
+	  AngularJS is an open-source JavaScript framework,
+	  maintained by Google, that assists with running
+	  single-page applications.
+
+	  http://angularjs.com
