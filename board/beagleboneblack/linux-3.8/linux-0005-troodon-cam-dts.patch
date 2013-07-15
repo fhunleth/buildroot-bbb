@@ -1,12 +1,21 @@
+<<<<<<< HEAD
 From bf201bce0c0ebf667b9c7216643f7da80b03d944 Mon Sep 17 00:00:00 2001
+=======
+From ea8ee05e2b5ad61f112c08e6698332113f5f1114 Mon Sep 17 00:00:00 2001
+>>>>>>> Pull in camera dts and other configuration updates/fixes
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Fri, 12 Jul 2013 11:32:21 -0400
 Subject: [PATCH] troodon-cam dts
 
 ---
  firmware/Makefile                   |    1 +
+<<<<<<< HEAD
  firmware/capes/troodon-cam-00A0.dts |  248 +++++++++++++++++++++++++++++++++++
  2 files changed, 249 insertions(+)
+=======
+ firmware/capes/troodon-cam-00A0.dts |  218 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 219 insertions(+)
+>>>>>>> Pull in camera dts and other configuration updates/fixes
  create mode 100644 firmware/capes/troodon-cam-00A0.dts
 
 diff --git a/firmware/Makefile b/firmware/Makefile
@@ -23,10 +32,17 @@ index c13e51c..8142a56 100644
  	cape-bone-dvi-00A0.dtbo \
 diff --git a/firmware/capes/troodon-cam-00A0.dts b/firmware/capes/troodon-cam-00A0.dts
 new file mode 100644
+<<<<<<< HEAD
 index 0000000..9458f75
 --- /dev/null
 +++ b/firmware/capes/troodon-cam-00A0.dts
 @@ -0,0 +1,248 @@
+=======
+index 0000000..3cc8005
+--- /dev/null
++++ b/firmware/capes/troodon-cam-00A0.dts
+@@ -0,0 +1,218 @@
+>>>>>>> Pull in camera dts and other configuration updates/fixes
 +/*
 + * Copyright (C) 2013 Frank Hunleth <fhunleth@troodon-software.com>
 + *
@@ -59,8 +75,11 @@ index 0000000..9458f75
 +                "P9.25",        /* IMAGER Exposure */
 +                "P9.26",        /* PIXCLK */
 +                "P9.27",        /* GPS PPS */
+<<<<<<< HEAD
 +                "P9.31",        /* Old clock - must be input */
 +                "P9.41",        /* Old clock - must be input */
+=======
+>>>>>>> Pull in camera dts and other configuration updates/fixes
 +
 +                "P8.19",        /* Imager CLK */
 +                "P8.27",        /* Cin8 */
@@ -77,7 +96,11 @@ index 0000000..9458f75
 +                "P8.46",        /* Cin1 */
 +
 +                /* the hardware IP uses */
+<<<<<<< HEAD
 +                "uart2", "i2c1", "pru0", "pru1", "ehrpwm2A";
+=======
++                "uart2", "clkout2", "i2c1", "pru0", "pru1", "ehrpwm2A";
+>>>>>>> Pull in camera dts and other configuration updates/fixes
 +
 +        fragment@0 {
 +                target = <&am33xx_pinmux>;
@@ -92,7 +115,11 @@ index 0000000..9458f75
 +                        imager_pruss_pins: pinmux_imager_pruss_pins {
 +                                pinctrl-single,pins = <
 +                                        0x184 0x2e	/* uart1_txd.pr1_pru0_pru_r31_16, MODE6 | INPUT_NOPULLUP    : Imager's LEDOUT */
+<<<<<<< HEAD
 +                                        /* 0x1ac 0x05       mcasp0_ahclkx.pr1_pru0_pru_r30_7, MODE5 : Exposure */
+=======
++                                        0x1ac 0x05      /* mcasp0_ahclkx.pr1_pru0_pru_r30_7, MODE5 : Exposure */
+>>>>>>> Pull in camera dts and other configuration updates/fixes
 +                                        0x180 0x2e      /* uart1_rxd.pr1_pru1_pru_r31_16, MODE6 | INPUT_NOPULLUP    : PIXCLK */
 +
 +                                        0x0e0 0x2e      /* lcd_vsync.pr1_pru1_pru_r31_8, MODE6 | INPUT_NOPULLUP    : Cin8 */
@@ -120,6 +147,7 @@ index 0000000..9458f75
 +                                        0x074 0x07      /* gpmc_wpn.gpio0[31], MODE7      : IMAGER_STDBY */
 +                                        0x040 0x07      /* gpmc_a0.gpio1[16], MODE7       : IMAGER ~RESET */
 +                                        0x1a4 0x2f      /* mcasp0_fsr.gpio3[19], MODE7 | INPUT_NOPULLUP   : GPS PPS */
+<<<<<<< HEAD
 +                                        0x190 0x2f      /* mcasp0_aclkx.gpio3[14], MODE7 | INPUT_NOPULLUP   : Old clock */
 +                                        0x1b4 0x2f      /* xdma_event_intr1.gpio0[20], MODE7 | INPUT_NOPULLUP   : Old clock */
 +
@@ -128,6 +156,8 @@ index 0000000..9458f75
 +
 +                                        0x088 0x2f      /* gpmc_csn3.gpio2[0], MODE7 | INPUT_NOPULLUP : Shared with IMAGER ~RESET on BBB */
 +
+=======
+>>>>>>> Pull in camera dts and other configuration updates/fixes
 +                                >;
 +                        };
 +
@@ -171,7 +201,11 @@ index 0000000..9458f75
 +                        pinctrl-0 = <&imager_i2c1_pins>;
 +
 +                        /* this is the configuration part */
+<<<<<<< HEAD
 +                        clock-frequency = <400000>;
+=======
++                        clock-frequency = <100000>;
+>>>>>>> Pull in camera dts and other configuration updates/fixes
 +
 +                        #address-cells = <1>;
 +                        #size-cells = <0>;
@@ -237,6 +271,7 @@ index 0000000..9458f75
 +                                        gpio = <&gpio4 19 0x00>;	/* gpio4 is gpio3 */
 +                                        input;
 +                                };
+<<<<<<< HEAD
 +
 +                                unused_clock_1 {
 +                                        gpio-name = "unused_clock_1";
@@ -262,13 +297,24 @@ index 0000000..9458f75
 +                                /* 25 MHz to the imager (PWM has 20ns resolution) */
 +                                compatible	= "pwm_test";
 +                                pwms 		= <&ehrpwm2 0 40 0>;
+=======
++                        };
++
++                        pwm_test_P8_19 {
++                                compatible	= "pwm_test";
++                                pwms 		= <&ehrpwm2 0 1000000 0>;
+>>>>>>> Pull in camera dts and other configuration updates/fixes
 +                                pwm-names 	= "PWM_P8_19";
 +
 +                                pinctrl-names	= "default";
 +                                pinctrl-0	= <&pwm_P8_19>;
 +
 +                                enabled		= <1>;
+<<<<<<< HEAD
 +                                duty		= <20>;
+=======
++                                duty		= <500000>;
+>>>>>>> Pull in camera dts and other configuration updates/fixes
 +                                status 		= "okay";
 +                        };
 +
