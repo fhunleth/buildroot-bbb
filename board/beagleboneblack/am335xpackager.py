@@ -230,11 +230,14 @@ then
     echo Cannot write $$dest
     exit 1
 fi
-if [ "`mount | grep $$dest`" != "" ]
-then
-    echo $$dest must not be mounted
-    exit 1
-fi
+# Comment out until a better check can be done since
+# it should be ok to program from /root, but /root is
+# mounted and usually the place that has the firwmare file.
+#if [ "`mount | grep $$dest`" != "" ]
+#then
+#    echo $$dest must not be mounted
+#    exit 1
+#fi
 
 $additional_checks
 
