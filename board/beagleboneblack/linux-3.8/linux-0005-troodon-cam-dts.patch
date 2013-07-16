@@ -1,12 +1,12 @@
-From ea8ee05e2b5ad61f112c08e6698332113f5f1114 Mon Sep 17 00:00:00 2001
+From 19ad3015af99fc69dc66efee16914f5b42af6744 Mon Sep 17 00:00:00 2001
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Fri, 12 Jul 2013 11:32:21 -0400
 Subject: [PATCH] troodon-cam dts
 
 ---
  firmware/Makefile                   |    1 +
- firmware/capes/troodon-cam-00A0.dts |  218 +++++++++++++++++++++++++++++++++++
- 2 files changed, 219 insertions(+)
+ firmware/capes/troodon-cam-00A0.dts |  219 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 220 insertions(+)
  create mode 100644 firmware/capes/troodon-cam-00A0.dts
 
 diff --git a/firmware/Makefile b/firmware/Makefile
@@ -23,10 +23,10 @@ index c13e51c..8142a56 100644
  	cape-bone-dvi-00A0.dtbo \
 diff --git a/firmware/capes/troodon-cam-00A0.dts b/firmware/capes/troodon-cam-00A0.dts
 new file mode 100644
-index 0000000..3cc8005
+index 0000000..e902260
 --- /dev/null
 +++ b/firmware/capes/troodon-cam-00A0.dts
-@@ -0,0 +1,218 @@
+@@ -0,0 +1,219 @@
 +/*
 + * Copyright (C) 2013 Frank Hunleth <fhunleth@troodon-software.com>
 + *
@@ -230,15 +230,16 @@ index 0000000..3cc8005
 +                        };
 +
 +                        pwm_test_P8_19 {
++                                /* 25 MHz to the imager (PWM has 20ns resolution) */
 +                                compatible	= "pwm_test";
-+                                pwms 		= <&ehrpwm2 0 1000000 0>;
++                                pwms 		= <&ehrpwm2 0 40 0>;
 +                                pwm-names 	= "PWM_P8_19";
 +
 +                                pinctrl-names	= "default";
 +                                pinctrl-0	= <&pwm_P8_19>;
 +
 +                                enabled		= <1>;
-+                                duty		= <500000>;
++                                duty		= <20>;
 +                                status 		= "okay";
 +                        };
 +
