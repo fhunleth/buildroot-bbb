@@ -1,12 +1,12 @@
-From 19ad3015af99fc69dc66efee16914f5b42af6744 Mon Sep 17 00:00:00 2001
+From 6710ad21606b67291c1d04a5f4810948cb3558f0 Mon Sep 17 00:00:00 2001
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Fri, 12 Jul 2013 11:32:21 -0400
 Subject: [PATCH] troodon-cam dts
 
 ---
  firmware/Makefile                   |    1 +
- firmware/capes/troodon-cam-00A0.dts |  219 +++++++++++++++++++++++++++++++++++
- 2 files changed, 220 insertions(+)
+ firmware/capes/troodon-cam-00A0.dts |  246 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 247 insertions(+)
  create mode 100644 firmware/capes/troodon-cam-00A0.dts
 
 diff --git a/firmware/Makefile b/firmware/Makefile
@@ -23,10 +23,10 @@ index c13e51c..8142a56 100644
  	cape-bone-dvi-00A0.dtbo \
 diff --git a/firmware/capes/troodon-cam-00A0.dts b/firmware/capes/troodon-cam-00A0.dts
 new file mode 100644
-index 0000000..e902260
+index 0000000..dc4e8cb
 --- /dev/null
 +++ b/firmware/capes/troodon-cam-00A0.dts
-@@ -0,0 +1,219 @@
+@@ -0,0 +1,246 @@
 +/*
 + * Copyright (C) 2013 Frank Hunleth <fhunleth@troodon-software.com>
 + *
@@ -59,6 +59,8 @@ index 0000000..e902260
 +                "P9.25",        /* IMAGER Exposure */
 +                "P9.26",        /* PIXCLK */
 +                "P9.27",        /* GPS PPS */
++                "P9.31",        /* Old clock - must be input */
++                "P9.41",        /* Old clock - must be input */
 +
 +                "P8.19",        /* Imager CLK */
 +                "P8.27",        /* Cin8 */
@@ -75,7 +77,7 @@ index 0000000..e902260
 +                "P8.46",        /* Cin1 */
 +
 +                /* the hardware IP uses */
-+                "uart2", "clkout2", "i2c1", "pru0", "pru1", "ehrpwm2A";
++                "uart2", "i2c1", "pru0", "pru1", "ehrpwm2A";
 +
 +        fragment@0 {
 +                target = <&am33xx_pinmux>;
@@ -90,7 +92,7 @@ index 0000000..e902260
 +                        imager_pruss_pins: pinmux_imager_pruss_pins {
 +                                pinctrl-single,pins = <
 +                                        0x184 0x2e	/* uart1_txd.pr1_pru0_pru_r31_16, MODE6 | INPUT_NOPULLUP    : Imager's LEDOUT */
-+                                        0x1ac 0x05      /* mcasp0_ahclkx.pr1_pru0_pru_r30_7, MODE5 : Exposure */
++                                        /* 0x1ac 0x05       mcasp0_ahclkx.pr1_pru0_pru_r30_7, MODE5 : Exposure */
 +                                        0x180 0x2e      /* uart1_rxd.pr1_pru1_pru_r31_16, MODE6 | INPUT_NOPULLUP    : PIXCLK */
 +
 +                                        0x0e0 0x2e      /* lcd_vsync.pr1_pru1_pru_r31_8, MODE6 | INPUT_NOPULLUP    : Cin8 */
@@ -118,6 +120,12 @@ index 0000000..e902260
 +                                        0x074 0x07      /* gpmc_wpn.gpio0[31], MODE7      : IMAGER_STDBY */
 +                                        0x040 0x07      /* gpmc_a0.gpio1[16], MODE7       : IMAGER ~RESET */
 +                                        0x1a4 0x2f      /* mcasp0_fsr.gpio3[19], MODE7 | INPUT_NOPULLUP   : GPS PPS */
++                                        0x190 0x2f      /* mcasp0_aclkx.gpio3[14], MODE7 | INPUT_NOPULLUP   : Old clock */
++                                        0x1b4 0x2f      /* xdma_event_intr1.gpio0[20], MODE7 | INPUT_NOPULLUP   : Old clock */
++
++                                        0x1ac 0x2f      /* mcasp0_ahclkx.gpio3[21], MODE7 | INPUT_NOPULLUP : 24.576 MHz clock on this pin, so keep disconnected */
++                                        0x06c 0x07      /* gpmc_a11.gpio1[27], MODE7 | INPUT_NOPULLUP : 24.576 MHz clock enable */
++
 +                                >;
 +                        };
 +
@@ -161,7 +169,7 @@ index 0000000..e902260
 +                        pinctrl-0 = <&imager_i2c1_pins>;
 +
 +                        /* this is the configuration part */
-+                        clock-frequency = <100000>;
++                        clock-frequency = <400000>;
 +
 +                        #address-cells = <1>;
 +                        #size-cells = <0>;
@@ -226,6 +234,25 @@ index 0000000..e902260
 +                                        gpio-name = "gps_pps";
 +                                        gpio = <&gpio4 19 0x00>;	/* gpio4 is gpio3 */
 +                                        input;
++                                };
++
++                                unused_clock_1 {
++                                        gpio-name = "unused_clock_1";
++                                        gpio = <&gpio4 14 0x00>;	/* gpio4 is gpio3 */
++                                        input;
++                                };
++
++                                unused_clock_2 {
++                                        gpio-name = "unused_clock_2";
++                                        gpio = <&gpio1 20 0x00>;	/* gpio4 is gpio3 */
++                                        input;
++                                };
++
++                                clk_24_576_enable {
++                                        gpio-name = "clk_24_576_enable";
++                                        gpio = <&gpio2 27 0x00>;	/* gpio4 is gpio3 */
++                                        output;
++                                        init-low;
 +                                };
 +                        };
 +
