@@ -40,7 +40,7 @@ define AM335X_PRU_PACKAGE_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 -D $(@D)/pru_sw/example_apps/bin/PRU_memAccess_DDR_PRUsharedRAM.bin \
 		 $(TARGET_DIR)/usr/bin/PRU_memAccess_DDR_PRUsharedRAM.bin
 	$(INSTALL) -m 0755 -D $(@D)/pru_sw/example_apps/bin/PRU_memAccessPRUDataRam.bin \
-		 $(TARGET_DIR)/usr/bin/PRU_memAccess_DDR_PRUDataRam.bin
+		 $(TARGET_DIR)/usr/bin/PRU_memAccessPRUDataRam.bin
 	$(INSTALL) -m 0755 -D $(@D)/pru_sw/example_apps/bin/PRU_PRU0toPRU1_Interrupt.bin \
 		 $(TARGET_DIR)/usr/bin/PRU_PRU0toPRU1_Interrupt.bin
 	$(INSTALL) -m 0755 -D $(@D)/pru_sw/example_apps/bin/PRU_PRU1toPRU0_Interrupt.bin \
