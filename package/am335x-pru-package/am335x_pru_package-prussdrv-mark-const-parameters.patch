@@ -1,0 +1,57 @@
+From f6f51fae45c6c43164f3b17342b10ba49f213180 Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Tue, 23 Jul 2013 10:05:58 -0400
+Subject: [PATCH] prussdrv: mark const parameters
+
+---
+ pru_sw/app_loader/include/prussdrv.h   |    4 ++--
+ pru_sw/app_loader/interface/prussdrv.c |    4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/pru_sw/app_loader/include/prussdrv.h b/pru_sw/app_loader/include/prussdrv.h
+index 90c489b..e653030 100755
+--- a/pru_sw/app_loader/include/prussdrv.h
++++ b/pru_sw/app_loader/include/prussdrv.h
+@@ -119,7 +119,7 @@ extern "C" {
+ 
+     int prussdrv_pru_write_memory(unsigned int pru_ram_id,
+                                   unsigned int wordoffset,
+-                                  unsigned int *memarea,
++                                  const unsigned int *memarea,
+                                   unsigned int bytelength);
+ 
+     int prussdrv_pruintc_init(tpruss_intc_initdata * prussintc_init_data);
+@@ -148,7 +148,7 @@ extern "C" {
+ 
+     int prussdrv_exit(void);
+ 
+-    int prussdrv_exec_program(int prunum, char *filename);
++    int prussdrv_exec_program(int prunum, const char *filename);
+ 
+     int prussdrv_start_irqthread(unsigned int pru_evtout_num, int priority,
+                                  prussdrv_function_handler irqhandler);
+diff --git a/pru_sw/app_loader/interface/prussdrv.c b/pru_sw/app_loader/interface/prussdrv.c
+index 21e4ba4..c4d2ee0 100755
+--- a/pru_sw/app_loader/interface/prussdrv.c
++++ b/pru_sw/app_loader/interface/prussdrv.c
+@@ -303,7 +303,7 @@ int prussdrv_pru_disable(unsigned int prunum)
+ 
+ int prussdrv_pru_write_memory(unsigned int pru_ram_id,
+                               unsigned int wordoffset,
+-                              unsigned int *memarea,
++                              const unsigned int *memarea,
+                               unsigned int bytelength)
+ {
+     unsigned int *pruramarea, i, wordlength;
+@@ -587,7 +587,7 @@ int prussdrv_exit()
+     return 0;
+ }
+ 
+-int prussdrv_exec_program(int prunum, char *filename)
++int prussdrv_exec_program(int prunum, const char *filename)
+ {
+     FILE *fPtr;
+     unsigned char fileDataArray[PRUSS_MAX_IRAM_SIZE];
+-- 
+1.7.9.5
+
