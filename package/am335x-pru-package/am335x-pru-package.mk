@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-AM335X_PRU_PACKAGE_VERSION = e363612
+AM335X_PRU_PACKAGE_VERSION = dbd22a0
 AM335X_PRU_PACKAGE_SITE = http://github.com/beagleboard/am335x_pru_package/tarball/$(AM335X_PRU_PACKAGE_VERSION)
 AM335X_PRU_PACKAGE_LICENSE = BSD-3c
 AM335X_PRU_PACKAGE_LICENSE_FILES = pru_sw/utils/LICENCE.txt

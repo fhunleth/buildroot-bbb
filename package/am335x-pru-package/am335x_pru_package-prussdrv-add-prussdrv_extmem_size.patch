@@ -1,0 +1,42 @@
+From b2d711230025de88782498b1969339f7d149acef Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Tue, 23 Jul 2013 15:40:10 -0400
+Subject: [PATCH 2/2] prussdrv: add prussdrv_extmem_size
+
+---
+ pru_sw/app_loader/include/prussdrv.h   |    2 ++
+ pru_sw/app_loader/interface/prussdrv.c |    5 +++++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/pru_sw/app_loader/include/prussdrv.h b/pru_sw/app_loader/include/prussdrv.h
+index e653030..59fa43e 100755
+--- a/pru_sw/app_loader/include/prussdrv.h
++++ b/pru_sw/app_loader/include/prussdrv.h
+@@ -128,6 +128,8 @@ extern "C" {
+ 
+     int prussdrv_map_extmem(void **address);
+ 
++    unsigned int prussdrv_extmem_size(void);
++
+     int prussdrv_map_prumem(unsigned int pru_ram_id, void **address);
+ 
+     int prussdrv_map_peripheral_io(unsigned int per_id, void **address);
+diff --git a/pru_sw/app_loader/interface/prussdrv.c b/pru_sw/app_loader/interface/prussdrv.c
+index c4d2ee0..9384be1 100755
+--- a/pru_sw/app_loader/interface/prussdrv.c
++++ b/pru_sw/app_loader/interface/prussdrv.c
+@@ -466,6 +466,11 @@ int prussdrv_map_extmem(void **address)
+ 
+ }
+ 
++unsigned int prussdrv_extmem_size(void)
++{
++    return prussdrv.extram_map_size;
++}
++
+ 
+ int prussdrv_map_prumem(unsigned int pru_ram_id, void **address)
+ {
+-- 
+1.7.9.5
+
