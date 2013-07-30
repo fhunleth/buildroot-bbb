@@ -1,12 +1,12 @@
-From 6710ad21606b67291c1d04a5f4810948cb3558f0 Mon Sep 17 00:00:00 2001
+From bf201bce0c0ebf667b9c7216643f7da80b03d944 Mon Sep 17 00:00:00 2001
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Fri, 12 Jul 2013 11:32:21 -0400
 Subject: [PATCH] troodon-cam dts
 
 ---
  firmware/Makefile                   |    1 +
- firmware/capes/troodon-cam-00A0.dts |  246 +++++++++++++++++++++++++++++++++++
- 2 files changed, 247 insertions(+)
+ firmware/capes/troodon-cam-00A0.dts |  248 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 249 insertions(+)
  create mode 100644 firmware/capes/troodon-cam-00A0.dts
 
 diff --git a/firmware/Makefile b/firmware/Makefile
@@ -23,10 +23,10 @@ index c13e51c..8142a56 100644
  	cape-bone-dvi-00A0.dtbo \
 diff --git a/firmware/capes/troodon-cam-00A0.dts b/firmware/capes/troodon-cam-00A0.dts
 new file mode 100644
-index 0000000..dc4e8cb
+index 0000000..9458f75
 --- /dev/null
 +++ b/firmware/capes/troodon-cam-00A0.dts
-@@ -0,0 +1,246 @@
+@@ -0,0 +1,248 @@
 +/*
 + * Copyright (C) 2013 Frank Hunleth <fhunleth@troodon-software.com>
 + *
@@ -124,7 +124,9 @@ index 0000000..dc4e8cb
 +                                        0x1b4 0x2f      /* xdma_event_intr1.gpio0[20], MODE7 | INPUT_NOPULLUP   : Old clock */
 +
 +                                        0x1ac 0x2f      /* mcasp0_ahclkx.gpio3[21], MODE7 | INPUT_NOPULLUP : 24.576 MHz clock on this pin, so keep disconnected */
-+                                        0x06c 0x07      /* gpmc_a11.gpio1[27], MODE7 | INPUT_NOPULLUP : 24.576 MHz clock enable */
++                                        0x06c 0x07      /* gpmc_a11.gpio1[27], MODE7 : 24.576 MHz clock enable */
++
++                                        0x088 0x2f      /* gpmc_csn3.gpio2[0], MODE7 | INPUT_NOPULLUP : Shared with IMAGER ~RESET on BBB */
 +
 +                                >;
 +                        };
