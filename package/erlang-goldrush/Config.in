@@ -1,0 +1,8 @@
+config BR2_PACKAGE_ERLANG_GOLDRUSH
+	bool "erlang-goldrush"
+	depends on BR2_PACKAGE_ERLANG
+	help
+	  Small, fast event processing and monitoring for Erlang/OTP
+	  applications.
+
+	  http://github.com/DeadZen/goldrush
