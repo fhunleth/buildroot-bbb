@@ -12,6 +12,10 @@ ERLANG_REBAR_LICENSE_FILE = LICENSE
 ERLANG_REBAR_DEPENDENCIES = erlang host-erlang
 HOST_ERLANG_REBAR_DEPENDENCIES = host-erlang
 
+# Macro for invoking rebar in other packages
+REBAR = REBAR_DEPS_DIR=$(ERLANG_PACKAGE_INSTALL_DIR) \
+                $(HOST_DIR)/usr/bin/rebar
+
 define ERLANG_REBAR_BUILD_CMDS
 	(cd $(@D); $(HOST_MAKE_ENV) ./bootstrap)
 endef

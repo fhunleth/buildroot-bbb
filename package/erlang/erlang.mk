@@ -14,6 +14,8 @@ ERLANG_LICENSE = EPL
 ERLANG_LICENSE_FILES = EPLICENCE
 ERLANG_INSTALL_STAGING = YES
 
+ERLANG_PACKAGE_INSTALL_DIR = $(TARGET_DIR)/usr/lib/erlang/lib
+
 # The configure checks for these functions fail incorrectly
 ERLANG_CONF_ENV = ac_cv_func_isnan=yes ac_cv_func_isinf=yes
 
@@ -50,7 +52,7 @@ define ERLANG_REMOVE_UNUSED
 	find $(TARGET_DIR)/usr/lib/erlang -type d -name src -prune -exec rm -rf {} \;
 	find $(TARGET_DIR)/usr/lib/erlang -type d -name examples -prune -exec rm -rf {} \;
 	for package in $(ERLANG_REMOVE_PACKAGES); do \
-		rm -rf $(TARGET_DIR)/usr/lib/erlang/lib/$${package}-*; \
+		rm -rf $(ERLANG_PACKAGE_INSTALL_DIR)/$${package}-*; \
 	done
 endef
 
