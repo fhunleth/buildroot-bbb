@@ -1,0 +1,8 @@
+config BR2_PACKAGE_ERLANG_REBAR
+	bool "erlang-rebar"
+	depends on BR2_PACKAGE_ERLANG
+	help
+	  Erlang build tool that makes it easy to compile and test Erlang
+	  applications, port drivers and releases.
+
+	  http://gihub.com/rebar/rebar
