@@ -1,0 +1,8 @@
+config BR2_PACKAGE_ERLANG_NETLINK
+	bool "erlang-netlink"
+	depends on BR2_PACKAGE_ERLANG
+	select BR2_PACKAGE_ERLANG_LAGER
+	help
+	  Erlang support for the Netlink protocol
+
+	  http://github.com/feuerlabs/netlink
