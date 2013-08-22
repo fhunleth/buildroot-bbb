@@ -21,7 +21,7 @@ REBAR = $(HOST_MAKE_ENV) \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
 	ERL_CFLAGS="-I$(STAGING_DIR)/usr/lib/erlang/erts-5.9.3.1/include -I$(STAGING_DIR)/usr/lib/erlang/lib/erl_interface-3.7.9/include" \
 	ERL_LDFLAGS="-L$(STAGING_DIR)/usr/lib/erlang/erts-5.9.3.1/lib -L$(STAGING_DIR)/usr/lib/erlang/lib/erl_interface-3.7.9/lib -lerts -lei" \
-	$(HOST_DIR)/usr/bin/rebar -vvv deps_dir=$(ERLANG_PACKAGE_INSTALL_DIR)
+	$(HOST_DIR)/usr/bin/rebar -vv deps_dir=$(ERLANG_PACKAGE_INSTALL_DIR)
 
 define ERLANG_REBAR_BUILD_CMDS
 	(cd $(@D); $(HOST_MAKE_ENV) ./bootstrap)
