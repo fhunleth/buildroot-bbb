@@ -1,0 +1,8 @@
+config BR2_PACKAGE_ERLANG_LAGER
+	bool "erlang-lager"
+	depends on BR2_PACKAGE_ERLANG
+	select BR2_PACKAGE_ERLANG_GOLDRUSH
+	help
+	  A logging framework for Erlang/OTP
+
+	  http://github.com/basho/lager
