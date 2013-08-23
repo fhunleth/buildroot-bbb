@@ -2,8 +2,6 @@ BR2_arm=y
 BR2_cortex_a8=y
 BR2_KERNEL_HEADERS_VERSION=y
 BR2_DEFAULT_KERNEL_VERSION="3.8.13"
-BR2_EXTRA_GCC_CONFIG_OPTIONS="--with-fpu=vfpv3 --with-float=hard"
-# BR2_SOFT_FLOAT is not set
 BR2_TARGET_GENERIC_HOSTNAME="beaglebone"
 BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_MDEV=y
 BR2_TARGET_GENERIC_GETTY_PORT="ttyO0"
@@ -19,7 +17,7 @@ BR2_TARGET_UBOOT_SPL_NAME="MLO"
 BR2_LINUX_KERNEL=y
 BR2_LINUX_KERNEL_CUSTOM_VERSION=y
 BR2_LINUX_KERNEL_CUSTOM_VERSION_VALUE="3.8.13"
-BR2_LINUX_KERNEL_PATCH="http://rcn-ee.net/deb/sid-armhf/v3.8.13-bone22/patch-3.8.13-bone22.diff.gz board/beagleboneblack/linux-0001-Add-missing-DTC-flags.patch"
+BR2_LINUX_KERNEL_PATCH="http://rcn-ee.net/deb/sid-armhf/v3.8.13-bone26/patch-3.8.13-bone26.diff.gz"
 BR2_LINUX_KERNEL_USE_CUSTOM_CONFIG=y
 BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE="board/beagleboneblack/linux-3.8.config"
 BR2_LINUX_KERNEL_DTS_SUPPORT=y
