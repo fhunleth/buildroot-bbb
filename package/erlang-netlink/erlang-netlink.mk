@@ -4,7 +4,7 @@
 #
 #############################################################
 
-ERLANG_NETLINK_VERSION = b951f8a
+ERLANG_NETLINK_VERSION = 902c983
 ERLANG_NETLINK_SITE = http://github.com/fhunleth/netlink/tarball/$(ERLANG_NETLINK_VERSION)
 ERLANG_NETLINK_LICENSE = MPLv2.0
 ERLANG_NETLINK_LICENSE_FILE = LICENSE
