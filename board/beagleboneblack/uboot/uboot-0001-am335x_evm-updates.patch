@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 From 45deef5d86f48449df4571030c1afc0242ba4566 Mon Sep 17 00:00:00 2001
-=======
-From 43dba70f83fdf5ba46d87fa1d94abd6975caf528 Mon Sep 17 00:00:00 2001
->>>>>>> beagleboneblack: u-boot updates
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Thu, 4 Jul 2013 22:09:17 -0400
 Subject: [PATCH] u-boot simplifications for bbb
 
   1. Trim out unused boot options in env
   2. Add eMMC boot (check SDCard first)
-<<<<<<< HEAD
   3. Turn off unused uboot features
 ---
  include/configs/am335x_evm.h |  269 ++++--------------------------------------
@@ -28,32 +23,13 @@ index ef00306..9ae4d47 100644
  #define CONFIG_SETUP_MEMORY_TAGS
  #define CONFIG_INITRD_TAG
 @@ -56,86 +55,28 @@
-=======
-  3. bootm -> bootz
-  4. Turn off unused uboot features
----
- include/configs/am335x_evm.h |  104 +++++++++++++++---------------------------
- 1 file changed, 36 insertions(+), 68 deletions(-)
-
-diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
-index ef00306..3352def 100644
---- a/include/configs/am335x_evm.h
-+++ b/include/configs/am335x_evm.h
-@@ -56,86 +56,28 @@
->>>>>>> beagleboneblack: u-boot updates
  	"loadaddr=0x80200000\0" \
  	"fdtaddr=0x80F80000\0" \
  	"fdt_high=0xffffffff\0" \
 -	"rdaddr=0x81000000\0" \
  	"bootdir=/boot\0" \
-<<<<<<< HEAD
  	"bootfile=uImage\0" \
 -	"fdtfile=\0" \
-=======
--	"bootfile=uImage\0" \
--	"fdtfile=\0" \
-+	"bootfile=zImage\0" \
->>>>>>> beagleboneblack: u-boot updates
 +	"fdtfile=am335x-boneblack.dtb\0" \
  	"console=ttyO0,115200n8\0" \
  	"optargs=\0" \
@@ -114,11 +90,7 @@ index ef00306..3352def 100644
 +	"loadfdt=load mmc ${mmcdev}:${mmcpart} ${fdtaddr} ${bootdir}/${fdtfile}\0" \
  	"mmcboot=echo Booting from mmc ...; " \
  		"run mmcargs; " \
-<<<<<<< HEAD
  		"bootm ${loadaddr} - ${fdtaddr}\0" \
-=======
--		"bootm ${loadaddr} - ${fdtaddr}\0" \
->>>>>>> beagleboneblack: u-boot updates
 -	"nandboot=echo Booting from nand ...; " \
 -		"run nandargs; " \
 -		"nand read ${loadaddr} ${nandsrcaddr} ${nandimgsize}; " \
@@ -138,18 +110,10 @@ index ef00306..3352def 100644
 -	"ramboot=echo Booting from ramdisk ...; " \
 -		"run ramargs; " \
 -		"bootm ${loadaddr} ${rdaddr} ${fdtaddr}\0" \
-<<<<<<< HEAD
  	"findfdt="\
  		"if test $board_name = A335BONE; then " \
  			"setenv fdtfile am335x-bone.dtb; fi; " \
 @@ -150,7 +91,8 @@
-=======
-+		"bootz ${loadaddr} - ${fdtaddr}\0" \
- 	"findfdt="\
- 		"if test $board_name = A335BONE; then " \
- 			"setenv fdtfile am335x-bone.dtb; fi; " \
-@@ -150,7 +92,8 @@
->>>>>>> beagleboneblack: u-boot updates
  
  #define CONFIG_BOOTCOMMAND \
  	"run findfdt; " \
@@ -159,11 +123,7 @@ index ef00306..3352def 100644
  		"echo SD/MMC found on device ${mmcdev};" \
  		"if run loadbootenv; then " \
  			"echo Loaded environment from ${bootenv};" \
-<<<<<<< HEAD
 @@ -164,9 +106,23 @@
-=======
-@@ -164,9 +107,23 @@
->>>>>>> beagleboneblack: u-boot updates
  			"run loadfdt;" \
  			"run mmcboot;" \
  		"fi;" \
@@ -189,7 +149,6 @@ index ef00306..3352def 100644
  
  /* Clock Defines */
  #define V_OSCK				24000000  /* Clock output from T2 */
-<<<<<<< HEAD
 @@ -205,50 +161,9 @@
  #define CONFIG_DOS_PARTITION
  #define CONFIG_CMD_FAT
@@ -399,95 +358,6 @@ index ef00306..3352def 100644
 -#endif
 -
  #endif	/* ! __CONFIG_AM335X_EVM_H */
-=======
-@@ -209,6 +166,7 @@
- #define CONFIG_CMD_EXT4
- #define CONFIG_CMD_FS_GENERIC
- 
-+#if 0
- #define CONFIG_SPI
- #define CONFIG_OMAP3_SPI
- #define CONFIG_MTD_DEVICE
-@@ -248,6 +206,7 @@
- 	"u-boot part 0 5;" \
- 	"kernel part 0 7;" \
- 	"rootfs part 0 8"
-+#endif
- 
-  /* Physical Memory Map */
- #define CONFIG_NR_DRAM_BANKS		1		/*  1 bank of DRAM */
-@@ -324,6 +283,7 @@
- #define CONFIG_SPL_SERIAL_SUPPORT
- #define CONFIG_SPL_GPIO_SUPPORT
- #define CONFIG_SPL_YMODEM_SUPPORT
-+#if 0
- #define CONFIG_SPL_NET_SUPPORT
- #define CONFIG_SPL_NET_VCI_STRING	"AM335x U-Boot SPL"
- #define CONFIG_SPL_ETH_SUPPORT
-@@ -334,9 +294,11 @@
- #define CONFIG_SPL_SPI_CS		0
- #define CONFIG_SYS_SPI_U_BOOT_OFFS	0x80000
- #define CONFIG_SPL_MUSB_NEW_SUPPORT
-+#endif
- #define CONFIG_SPL_LDSCRIPT		"$(CPUDIR)/am33xx/u-boot-spl.lds"
- 
- #define CONFIG_SPL_BOARD_INIT
-+#if 0
- #define CONFIG_SPL_NAND_AM33XX_BCH
- #define CONFIG_SPL_NAND_SUPPORT
- #define CONFIG_SPL_NAND_BASE
-@@ -367,6 +329,7 @@
- #define	CONFIG_SYS_NAND_U_BOOT_START	CONFIG_SYS_TEXT_BASE
- 
- #define CONFIG_SYS_NAND_U_BOOT_OFFS	0x80000
-+#endif
- 
- /*
-  * 1MB into the SDRAM to allow for SPL's bss at the beginning of SDRAM
-@@ -385,6 +348,7 @@
- #define CONFIG_SKIP_LOWLEVEL_INIT
- #endif
- 
-+#if 0
- /*
-  * USB configuration
-  */
-@@ -411,6 +375,7 @@
- #define CONFIG_USB_ETH_RNDIS
- #define CONFIG_USBNET_HOST_ADDR	"de:ad:be:af:00:00"
- #endif /* CONFIG_MUSB_GADGET */
-+#endif
- 
- #if defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_USBETH_SUPPORT)
- /* disable host part of MUSB in SPL */
-@@ -444,6 +409,7 @@
- /* Unsupported features */
- #undef CONFIG_USE_IRQ
- 
-+#if 0
- #define CONFIG_CMD_NET
- #define CONFIG_CMD_DHCP
- #define CONFIG_CMD_PING
-@@ -461,8 +427,9 @@
- #define CONFIG_PHYLIB
- #define CONFIG_PHY_ADDR			0
- #define CONFIG_PHY_SMSC
-+#endif
- 
--#define CONFIG_NAND
-+#undef CONFIG_NAND
- /* NAND support */
- #ifdef CONFIG_NAND
- #define CONFIG_CMD_NAND
-@@ -480,6 +447,7 @@
- 							/* CS0 */
- #define CONFIG_SYS_MAX_NAND_DEVICE	1		/* Max number of NAND
- 							   devices */
-+
- #if !defined(CONFIG_SPI_BOOT)
- #undef CONFIG_ENV_IS_NOWHERE
- #define CONFIG_ENV_IS_IN_NAND
->>>>>>> beagleboneblack: u-boot updates
 -- 
 1.7.9.5
 
