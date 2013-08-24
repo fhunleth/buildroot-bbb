@@ -1,0 +1,26 @@
+
+Bridge setup
+============
+
+sudo brctl addbr br0
+sudo brctl addif br0 eth0
+sudo ip addr flush dev eth0
+# Substitute the host's IP address (what was on eth0) below
+sudo ip add 192.168.1.7/24 dev br0
+sudo tunctl -u `whoami`
+# Should make tap0, but could be tap1, etc.
+sudo ip link set tap0 up
+sudo brctl addif br0 tap0
+
+Run qemu
+========
+sudo qemu-system-arm -M vexpress-a9 -kernel output/images/zImage -drive file=output/images/rootfs.ext2,if=sd -append "console=ttyAMA0,115200 root=/dev/mmcblk0" -nographic -net nic,model=lan9118 -net tap,id=tap0
+
+When in qemu here's what to do the non-Erlang way:
+
+ip link set eth0 up
+# udhcpc # use DHCP
+ip add 192.168.1.80/24 dev eth0
+
+# To exit, either run "sudo killall qemu-system-arm" in another window or
+poweroff
