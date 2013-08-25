@@ -1,0 +1,50 @@
+From 62d53be739b9e779bf1c1aac5eb58c6c91aaa940 Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Sun, 25 Aug 2013 10:44:37 -0400
+Subject: [PATCH] Show full command when applet isn't found
+
+---
+ libbb/appletlib.c | 20 ++++++++++++++++++--
+ 1 file changed, 18 insertions(+), 2 deletions(-)
+
+diff --git a/libbb/appletlib.c b/libbb/appletlib.c
+index 67df446..ed602be 100644
+--- a/libbb/appletlib.c
++++ b/libbb/appletlib.c
+@@ -729,7 +729,15 @@ static int busybox_main(char **argv)
+ 
+ 	/*bb_error_msg_and_die("applet not found"); - sucks in printf */
+ 	full_write2_str(applet_name);
+-	full_write2_str(": applet not found\n");
++	full_write2_str(": applet not found\nFull cmd: ");
++	{
++		int i;
++		for (i = 0; argv[i]; i++) {
++			full_write2_str(argv[i]);
++			full_write2_str(" ");
++		}
++	}
++	full_write2_str("\n");
+ 	xfunc_die();
+ }
+ 
+@@ -824,7 +832,15 @@ int main(int argc UNUSED_PARAM, char **argv)
+ 
+ 	/*bb_error_msg_and_die("applet not found"); - sucks in printf */
+ 	full_write2_str(applet_name);
+-	full_write2_str(": applet not found\n");
++	full_write2_str(": applet not found\nFull cmd: ");
++	{
++		int i;
++		for (i = 0; argv[i]; i++) {
++			full_write2_str(argv[i]);
++			full_write2_str(" ");
++		}
++	}
++	full_write2_str("\n");
+ 	xfunc_die();
+ #endif
+ }
+-- 
+1.8.1.2
+
