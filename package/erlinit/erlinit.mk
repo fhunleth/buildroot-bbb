@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-ERLINIT_VERSION = 7cc3cac
+ERLINIT_VERSION = 5bfd089
 ERLINIT_SITE = http://github.com/fhunleth/erlinit/tarball/$(ERLINIT_VERSION)
 ERLINIT_LICENSE = MIT 
 
