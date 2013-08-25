@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ERLANG_RANCH
+	bool "erlang-ranch"
+	depends on BR2_PACKAGE_ERLANG
+	help
+	  Socket acceptor pool for TCP protocols.
+
+	  http://github.com/extend/ranch
