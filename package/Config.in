@@ -1,5 +1,7 @@
 menu "Target packages"
 
+source "package/erlcam/Config.in"
+
 source "package/busybox/Config.in"
 
 menu "Audio and video applications"

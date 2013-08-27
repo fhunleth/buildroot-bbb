@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ERLCAM
+	bool "erlcam"
+	select BR2_PACKAGE_ERLANG_COWBOY
+	help
+	  Erlang camera test application.
+
+	  http://github.com/fhunleth/erlcam
