@@ -1,0 +1,30 @@
+From bf765711f6282cc8501ca89df05dc4f99a6bb831 Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Thu, 29 Aug 2013 11:33:19 -0400
+Subject: [PATCH] Fix makefile so dependences can be checked
+
+---
+ c_src/Makefile.cmd | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/c_src/Makefile.cmd b/c_src/Makefile.cmd
+index ff91c49..3ef9a95 100644
+--- a/c_src/Makefile.cmd
++++ b/c_src/Makefile.cmd
+@@ -3,10 +3,10 @@ CC=gcc
+ CMD_DIR= $(dir$(lastword $(MAKEFILE_LIST)))../priv
+ CMD_PATH= $(CMD_DIR)/procket
+ 
+-all: dirs compile
++all: $(CMD_PATH)
+ 
+-dirs:
++$(CMD_DIR):
+ 	-@mkdir -p $(CMD_DIR)
+ 
+-compile:
++$(CMD_PATH): procket_cmd.c $(CMD_DIR)
+ 	$(CC) $(PROCKET_CFLAGS) -g -Wall -o $(CMD_PATH) -L. procket_cmd.c -lancillary
+-- 
+1.8.1.2
+
