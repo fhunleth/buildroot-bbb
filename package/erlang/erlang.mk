@@ -24,7 +24,7 @@ ERLANG_CONF_ENV = ac_cv_func_isnan=yes ac_cv_func_isinf=yes
 # for documentation.
 ERLANG_CONF_ENV += erl_xcomp_sysroot=$(STAGING_DIR)
 
-ERLANG_CONF_OPT = --without-javac
+ERLANG_CONF_OPT = --without-javac --disable-smp-support
 HOST_ERLANG_CONF_OPT = --without-javac
 
 ifeq ($(BR2_PACKAGE_NCURSES),y)
