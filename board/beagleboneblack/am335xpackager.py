@@ -172,7 +172,7 @@ def build_complete_img(memory_map, args):
     
     # Corrupt the application partition to make sure that it gets formatted
     # on first boot
-    locate(memory, memory_map['application_partition_start'], memory_map['application_partition_count'], bytearray(32 * BLOCK_SIZE))
+    locate(memory, memory_map['application_partition_start'], memory_map['application_partition_count'], bytearray(memory_map['application_partition_count'] * BLOCK_SIZE))
     
     return memory
 

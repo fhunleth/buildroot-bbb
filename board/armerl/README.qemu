@@ -17,14 +17,22 @@ sudo brctl addif br0 tap0
 
 Run qemu
 ========
-sudo qemu-system-arm -M vexpress-a9 -kernel output/images/zImage -drive file=output/images/rootfs.ext2,if=sd -append "console=ttyAMA0,115200 root=/dev/mmcblk0" -nographic -net nic,model=lan9118 -net tap,id=tap0
 
-When in qemu here's what to do the non-Erlang way:
+The qemu image is setup similarly to the Beaglebone Black image in that it has
+4 partitions. The first partition is FAT-16 and not really useful at all
+except that it makes the next partitions line up the same as on the BBB. The
+2nd and 3rd partitions are identical copies of the rootfs. When testing out
+a firmware update, the 3rd partition will be updated and used on the next
+reboot. The 4th partition is used for application data.
 
-ip link set eth0 up
-# udhcpc # use DHCP
-ip addr add 192.168.1.80/24 dev eth0
-ip route add default via 192.168.1.1
+Here's the command line that I used to start qemu:
 
-# To exit, either run "sudo killall qemu-system-arm" in another window or
-poweroff
+sudo qemu-system-arm -M vexpress-a9 -kernel output/images/zImage -drive file=output/images/armerl-sdcard.img,if=sd -append "console=ttyAMA0,115200 root=/dev/mmcblk0p2" -nographic -net nic,model=lan9118 -net tap,id=tap0
+
+When in qemu here's what to do bring up eth0:
+
+os:cmd("ip link set eth0 up").
+os:cmd("ip addr add 192.168.1.80/24 dev eth0").
+os:cmd("ip route add default via 192.168.1.1").
+
+To exit, run "sudo killall qemu-system-arm" in another window
