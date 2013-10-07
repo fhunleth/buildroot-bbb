@@ -1,8 +1,0 @@
-config BR2_PACKAGE_ERLANG_PROCKET
-	bool "erlang-procket"
-	depends on BR2_PACKAGE_ERLANG
-	select BR2_PACKAGE_LIBPCAP
-	help
-	  Erlang interface to low level socket operations
-
-	  http://github.com/msantos/procket

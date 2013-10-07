@@ -1,8 +1,0 @@
-config BR2_PACKAGE_ERLANG_COWBOY
-	bool "erlang-cowboy"
-	depends on BR2_PACKAGE_ERLANG
-	select BR2_PACKAGE_ERLANG_RANCH
-	help
-	  Small, fast, modular HTTP server written in Erlang.
-
-	  http://github.com/extend/cowboy

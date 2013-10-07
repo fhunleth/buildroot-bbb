@@ -1,8 +1,0 @@
-config BR2_PACKAGE_ERLANG_GPIO
-	bool "erlang-gpio"
-	depends on BR2_PACKAGE_ERLANG
-	select BR2_PACKAGE_ERLANG_LAGER
-	help
-	  Sysfs GPIO port driver and Erlang module
-
-	  http://github.com/feuerlabs/gpio
