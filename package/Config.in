@@ -1,6 +1,7 @@
 menu "Target packages"
 
 source "package/erlcam/Config.in"
+source "package/nerves-demo/Config.in"
 
 source "package/busybox/Config.in"
 
@@ -355,6 +356,7 @@ source "package/erlang-netlink/Config.in"
 source "package/erlang-procket/Config.in"
 source "package/erlang-ranch/Config.in"
 source "package/erlang-rebar/Config.in"
+source "package/erlang-relx/Config.in"
 source "package/erlinit/Config.in"
 source "package/enscript/Config.in"
 source "package/haserl/Config.in"
