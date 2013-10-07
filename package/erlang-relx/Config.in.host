@@ -1,5 +1,5 @@
-config BR2_PACKAGE_ERLANG_RELX
-	bool "erlang-relx"
+config BR2_PACKAGE_HOST_ERLANG_RELX
+	bool "host erlang-relx"
 	depends on BR2_PACKAGE_ERLANG
 	select BR2_PACKAGE_ERLANG_REBAR
 	help
