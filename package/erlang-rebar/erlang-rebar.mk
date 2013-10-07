@@ -12,6 +12,9 @@ ERLANG_REBAR_LICENSE_FILE = LICENSE
 ERLANG_REBAR_DEPENDENCIES = erlang host-erlang
 HOST_ERLANG_REBAR_DEPENDENCIES = host-erlang
 
+ERLANG_ERTS_DIR = `ls -d $(STAGING_DIR)/usr/lib/erlang/erts-*`
+ERLANG_ERL_INTERFACE_DIR = `ls -d $(STAGING_DIR)/usr/lib/erlang/lib/erl_interface-*`
+
 # Macro for invoking rebar in other packages
 REBAR = $(HOST_MAKE_ENV) \
 	CC="$(TARGET_CC)" \
@@ -19,9 +22,9 @@ REBAR = $(HOST_MAKE_ENV) \
 	CFLAGS="$(TARGET_CFLAGS)" \
 	CXXFLAGS="$(TARGET_CXXFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
-	ERL_CFLAGS="-I$(STAGING_DIR)/usr/lib/erlang/erts-5.9.3.1/include -I$(STAGING_DIR)/usr/lib/erlang/lib/erl_interface-3.7.9/include" \
-	ERL_LDFLAGS="-L$(STAGING_DIR)/usr/lib/erlang/erts-5.9.3.1/lib -L$(STAGING_DIR)/usr/lib/erlang/lib/erl_interface-3.7.9/lib -lerts -lei" \
-	$(HOST_DIR)/usr/bin/rebar -vv deps_dir=$(ERLANG_PACKAGE_INSTALL_DIR)
+	ERL_CFLAGS="-I$(ERLANG_ERTS_DIR)/include -I$(ERLANG_ERL_INTERFACE_DIR)/include" \
+	ERL_LDFLAGS="-L$(ERLANG_ERTS_DIR)/lib -L$(ERLANG_ERL_INTERFACE_DIR)/lib -lerts -lei" \
+	$(HOST_DIR)/usr/bin/rebar -vv
 
 define ERLANG_REBAR_BUILD_CMDS
 	(cd $(@D); $(HOST_MAKE_ENV) ./bootstrap)

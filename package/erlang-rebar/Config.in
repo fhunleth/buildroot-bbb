@@ -5,4 +5,4 @@ config BR2_PACKAGE_ERLANG_REBAR
 	  Erlang build tool that makes it easy to compile and test Erlang
 	  applications, port drivers and releases.
 
-	  http://gihub.com/rebar/rebar
+	  http://github.com/rebar/rebar
