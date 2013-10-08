@@ -6,8 +6,17 @@
 #   fwupdate.sh <archive.fw> [arguments to update script]
 #
 # Examples:
-#   fwupdate.sh archive.fw -d /dev/sdb -f
-#   fwupdate.sh archive.fw -d /dev/mmcblock0
+#   Get a list of options:
+#     fwupdate archive.fw -?
+#
+#   Install the update on an attached SDCard on your PC.
+#   This installs everything.
+#     fwupdate archive.fw -d /dev/sdc -f
+#
+#   Install the update when running on the target. This
+#   only installs the new rootfs and is generally what
+#   you want to do for on-device upgrades.
+#     fwupdate archive.fw -d /dev/mmcblock0
 
 set -e
 
@@ -20,10 +29,6 @@ fi
 archive="$1"
 shift
 
-<<<<<<< HEAD
 #set -o pipefail
-=======
-set -o pipefail
->>>>>>> Pull in various settings to make the bbb more usable
 unzip -p $archive install.sh | sh -s - -a $archive $@
 
