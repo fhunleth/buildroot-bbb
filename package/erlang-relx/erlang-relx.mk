@@ -13,7 +13,7 @@ HOST_ERLANG_RELX_DEPENDENCIES = host-erlang host-erlang-rebar
 
 # Macro for invoking relx in other packages
 RELX = $(HOST_MAKE_ENV) \
-	$(HOST_DIR)/usr/bin/relx
+	$(HOST_DIR)/usr/bin/relx -l $(STAGING_DIR)/usr/lib/erlang/lib
 
 define HOST_ERLANG_RELX_BUILD_CMDS
 	$(MAKE1) -C $(@D)
