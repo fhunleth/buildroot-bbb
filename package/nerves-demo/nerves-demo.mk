@@ -4,10 +4,9 @@
 #
 #############################################################
 
-NERVES_DEMO_VERSION = 038c223
-NERVES_DEMO_SITE = ssh://git@bitbucket.org/fhunleth/erlang_webcontrol.git
-NERVES_DEMO_SITE_METHOD=git
-NERVES_DEMO_LICENSE = TBD
+NERVES_DEMO_VERSION = d5f7743966
+NERVES_DEMO_SITE = http://github.com/nerves-project/nerves-demo/tarball/$(NERVES_DEMO_VERSION)
+NERVES_DEMO_LICENSE = MIT
 NERVES_DEMO_INSTALL_DIR = $(TARGET_DIR)/srv/erlang
 
 NERVES_DEMO_DEPENDENCIES = erlang host-erlang-rebar host-erlang-relx

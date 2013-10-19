@@ -1,11 +1,11 @@
-################################################################################
+#############################################################
 #
 # erlinit
 #
-################################################################################
+#############################################################
 
 ERLINIT_VERSION = 5a616c7
-ERLINIT_SITE = http://github.com/fhunleth/erlinit/tarball/$(ERLINIT_VERSION)
+ERLINIT_SITE = http://github.com/nerves-project/erlinit/tarball/$(ERLINIT_VERSION)
 ERLINIT_LICENSE = MIT 
 
 # Make sure erlinit wins over busybox init
