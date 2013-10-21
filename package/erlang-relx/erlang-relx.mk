@@ -4,7 +4,7 @@
 #
 #############################################################
 
-ERLANG_RELX_VERSION = 73b166d
+ERLANG_RELX_VERSION = 794242f
 ERLANG_RELX_SITE = http://github.com/erlware/relx/tarball/$(ERLANG_RELX_VERSION)
 ERLANG_RELX_LICENSE = Apache-2.0 
 ERLANG_RELX_LICENSE_FILE = LICENSE.md
