@@ -7,10 +7,17 @@
 TARGETDIR=$1
 BOARDDIR=board/beagleboneblack
 IMAGESDIR=$TARGETDIR/../images
+FWTOOL=$TARGETDIR/../host/usr/bin/fwtool
 
-$BOARDDIR/am335xpackager.py -c $BOARDDIR/bbb-sdcard.cfg -s $IMAGESDIR/MLO -u $IMAGESDIR/u-boot.img -r $IMAGESDIR/rootfs.ext2 -f $IMAGESDIR/bbb.fw -g $IMAGESDIR/bbb-sdcard.img
+# Build the firmware image
+$FWTOOL -c $BOARDDIR/fwtool.config \
+	--mlo_path=$IMAGESDIR/MLO \
+	--uboot_path=$IMAGESDIR/u-boot.img \
+	--rootfs_path=$IMAGESDIR/rootfs.ext2 \
+	create $IMAGESDIR/bbb.fw 
 
-# Copy firmware updater script to the images directory
-# for convenience
-cp $BOARDDIR/rootfs-additions/usr/bin/fwupdate $IMAGESDIR
+# Build the raw image for the bulk programmer
+$FWTOOL -d $IMAGESDIR/bbb-sdcard.img \
+	-t complete \
+	run $IMAGESDIR/bbb.fw 
 
